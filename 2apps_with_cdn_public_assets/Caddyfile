@@ -1,30 +1,31 @@
 {
-  debug
+	debug
 }
 
+# domain 1
 importmap.local.site {
-  tls internal
+	tls internal
 
-  handle /assets/* {
-    root public
-    file_server
-  }
+	handle /assets/* {
+		root * {$APP1_DIR}
+		file_server
+	}
 
-  handle {
-    reverse_proxy 127.0.0.1:3000
-  }
+	handle {
+		reverse_proxy 127.0.0.1:3000
+	}
 }
 
-
+# domain 2
 esbuild.local.site {
-  tls internal
+	tls internal
 
-  handle /assets/* {
-    root * /Users/travis/devel/lz_tests/test_jsb_esbuild/public/
-    file_server
-  }
+	handle /assets/* {
+		root * {$APP2_DIR}
+		file_server
+	}
 
-  handle {
-    reverse_proxy 127.0.0.1:4000
-  }
+	handle {
+		reverse_proxy 127.0.0.1:4000
+	}
 }
